@@ -7,7 +7,7 @@ public class GB {
 	public static Scanner sc = new Scanner(System.in);
 	public static int PLAYERCNT;
 	public static int TURN;
-	public static int[] MAFIA = { 0, 0, 0, 0, 0, 1, 2, 2, 3, 3, 4, 4, 5 }; 
+	public static int[] MAFIA = { 0, 0, 0, 0, 0, 1, 2, 2, 3, 3, 4 }; 
 	public static String Winner = null;
 	
 	public static int readInt(String msg) {

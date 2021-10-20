@@ -55,6 +55,7 @@ public class MainExe {
 			System.out.println("\t     | 3. Game 종료      |");
 			System.out.println("\t     *ㅡ.ㅡ.ㅡ.ㅡ.ㅡ.ㅡ.ㅡ.ㅡ*");
 			int select = GB.readInt("- 메뉴를 선택하세요");
+			System.out.println();
 			if(select == 0) {
 				GB.gameRule();
 			}

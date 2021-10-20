@@ -38,6 +38,7 @@ public class SaveCitizen implements Command {
 		} else {
 			System.out.println("* 의사는 이미 사망하였으므로, 살릴 사람을 선택하지 않고 넘어가겠습니다.");
 		}
+		System.out.println();
 		
 		vo = new SpecialVO();
 		vo.setJob("경찰");

@@ -39,7 +39,7 @@ public class PlayerVote implements Command {
 		System.out.println("*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.\n");
 		list = playerService.getVoteResult();
 		int maxVote = list.get(0).getVote();
-		System.out.println("[ 투표 결과 ] =.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.");
+		System.out.println("[ 투표 결과 ] =.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.");
 		if(maxVote == 0) {
 			System.out.println("| * 아무도 추방당하지 않았습니다. 게임을 계속해서 진행하겠습니다.");
 		} else {
@@ -61,7 +61,7 @@ public class PlayerVote implements Command {
 				}
 			}
 		}
-		System.out.println("=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.");
+		System.out.println("=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.");
 		
 		System.out.println();
 		list = playerService.getPlayerList();

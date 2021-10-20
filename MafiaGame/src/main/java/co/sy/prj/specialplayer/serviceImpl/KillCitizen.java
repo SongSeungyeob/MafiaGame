@@ -38,5 +38,6 @@ public class KillCitizen implements Command {
 				break;
 			}
 		}
+		System.out.println();
 	}
 }
