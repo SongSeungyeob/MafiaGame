@@ -1,0 +1,41 @@
+CREATE TABLE player (
+                id VARCHAR2(10) PRIMARY KEY,
+                password VARCHAR2(1024) NOT NULL,
+                nickname VARCHAR2(50) NOT NULL UNIQUE, 
+                job VARCHAR2(20) default '시민',
+                havejob CHAR(1) default '0'
+				idx NUMBER default -1
+				vote NUMBER default 0
+				live CHAR(1) default '1');
+                
+CREATE TABLE speciallist (
+                nickname VARCHAR2(50) NOT NULL UNIQUE,
+                job VARCHAR2(50),
+                live CHAR(1) default '1'
+				info VARCHAR2(100)
+				idx NUMBER);
+                
+SELECT * FROM player;  
+SELECT * FROM speciallist;
+COMMIT;
+
+INSERT INTO player (id, password, nickname) VALUES ('aaa','1234', 'player1');
+INSERT INTO player (id, password, nickname) VALUES ('bbb','1234', 'player2');
+INSERT INTO player (id, password, nickname) VALUES ('ccc','1234', 'player3');
+INSERT INTO player (id, password, nickname) VALUES ('ddd','1234', 'player4');
+INSERT INTO player (id, password, nickname) VALUES ('eee','1234', 'player5');
+
+SELECT * FROM player;
+SELECT * FROM speciallist;
+
+UPDATE player
+SET job = '시민', havejob = '0', idx = -1, vote = 0, live = '1';
+DELETE FROM speciallist;
+COMMIT;
+
+SELECT player.nickname, NVL(speciallist.job, '시민')
+FROM player LEFT OUTER JOIN speciallist
+ON(player.nickname = speciallist.nickname)
+ORDER BY player.nickname;
+
+

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.sy.prj.player.service.PlayerMapper">
+	
+	<select id="getPlayerList"
+		    resultType="co.sy.prj.player.service.PlayerVO">
+		SELECT *
+		FROM player
+		WHERE live = '1' 
+		ORDER BY nickname
+	</select>
+	
+	<select id="getPlayerNum"
+			resultType="Int">
+		SELECT COUNT(*)
+		FROM player
+		WHERE live = '1'		
+	</select>
+	
+	<select id="getCitizenList"
+			resultType="co.sy.prj.player.service.PlayerVO">
+		SELECT *
+		FROM player
+		WHERE job = '시민' AND live = '1' 
+		ORDER BY nickname	
+	</select>
+	
+	<select id="getCitizenNum"
+			resultType="Int">
+		SELECT COUNT(*)
+		FROM player
+		WHERE live = '1' AND job = '시민'
+	</select>
+	
+	<select id="getMafiaNum"
+			resultType="Int">
+		SELECT COUNT(*)
+		FROM player
+		WHERE live = '1' AND job = '마피아'		
+	</select>
+	
+
+	<select id="getPlayerSelect"
+			parameterType="co.sy.prj.player.service.PlayerVO"
+			resultType="co.sy.prj.player.service.PlayerVO">
+		SELECT *
+		FROM player
+		<if test="idx == 0 and job == null">
+			WHERE nickname = #{nickname}
+		</if>
+		<if test="idx == 0 and nickname == null">
+			WHERE job = #{job}
+		</if>
+		<if test="job == null and nickname == null">
+			WHERE idx = #{idx}
+		</if>	
+		AND live = '1'
+	</select> 
+	
+	<select id="getPlayerTotalList"
+			resultType="co.sy.prj.player.service.PlayerVO">
+		SELECT player.nickname, NVL2(speciallist.job, speciallist.job, player.job) AS job
+		FROM player LEFT OUTER JOIN speciallist
+		ON(player.nickname = speciallist.nickname)
+		ORDER BY player.nickname		
+	</select>
+	
+	<select id="getVoteResult"
+			resultType="co.sy.prj.player.service.PlayerVO">
+		SELECT *
+		FROM player
+		WHERE live = '1'
+		ORDER BY vote DESC
+	</select>
+	
+	<insert id="insertPlayer"
+			parameterType="co.sy.prj.player.service.PlayerVO">
+		INSERT INTO player(id, password, nickname)
+		VALUES (#{id}, #{password}, #{nickname})
+	</insert>
+
+	<update id="updatePlayer"
+			parameterType="co.sy.prj.player.service.PlayerVO">
+		UPDATE player
+		SET job = #{job}, havejob = #{havejob}, idx = #{idx}, live = #{live}, vote = #{vote}
+		WHERE nickname = #{nickname} 		
+	</update>
+	
+	<update id="updateVote"
+			parameterType="co.sy.prj.player.service.PlayerVO">
+		UPDATE player
+		SET vote = vote + 1
+		WHERE nickname = #{nickname}
+	</update>
+	
+	<insert id="insertSpeciallist"
+			parameterType="co.sy.prj.player.service.PlayerVO">
+		INSERT INTO speciallist (nickname, job, live)
+		VALUES (#{nickname}, #{job}, #{live})
+	</insert>
+</mapper>

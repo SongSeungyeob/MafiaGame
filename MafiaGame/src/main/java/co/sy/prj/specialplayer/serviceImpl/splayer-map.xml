@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.sy.prj.specialplayer.service.SpecialPlayerMapper">
+	<select id="specialPlayerList"
+			resultType="co.sy.prj.specialplayer.service.SpecialVO">
+		SELECT *
+		FROM speciallist
+		WHERE live = '1'
+	</select>
+	
+	<select id="getSpecialPlayer"
+			parameterType="co.sy.prj.specialplayer.service.SpecialVO"
+			resultType="co.sy.prj.specialplayer.service.SpecialVO">
+		SELECT *
+		FROM speciallist
+		<if test="job == null">
+			WHERE nickname = #{nickname} AND live = '1'
+		</if>
+		<if test="nickname == null">
+			WHERE job = #{job} AND live = '1'
+		</if>		
+	</select>
+	
+	<select id="getMafiaList"
+			resultType="co.sy.prj.specialplayer.service.SpecialVO">
+		SELECT *
+		FROM speciallist
+		WHERE live = '1' AND job = '마피아'		
+	</select>
+	
+	<update id="updateSpeciallist"
+			parameterType="co.sy.prj.specialplayer.service.SpecialVO">
+		UPDATE speciallist
+		SET live = #{live, jdbcType=VARCHAR} , info = #{info, jdbcType=VARCHAR}
+		WHERE nickname = #{nickname} AND live = '1' 		
+	
+	</update>
+</mapper>
